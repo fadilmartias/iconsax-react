@@ -1,6 +1,6 @@
 {
-  "name": "iconsax",
-  "description": "iconsax for react and react native",
+  "name": "@fadilmartias/iconsax",
+  "description": "Fork of iconsax for React and React Native with support for React 19",
   "private": true,
   "workspaces": {
     "packages": [
@@ -10,8 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rendinjast/iconsax-react.git"
+    "url": "git+https://github.com/fadilmartias/iconsax-react.git"
   },
+  "bugs": {
+    "url": "https://github.com/fadilmartias/iconsax-react/issues"
+  },
+  "homepage": "https://github.com/fadilmartias/iconsax-react#readme",
   "version": "0.0.8",
   "scripts": {
     "gen": "node ./scripts/build.js",
