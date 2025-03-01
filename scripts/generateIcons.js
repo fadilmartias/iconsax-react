@@ -93,14 +93,14 @@ const switchStatementForVariants = (iconsAllVariant) => {
 };
 
 const initialTypeDefinitions = `/// <reference types="react" />
-import { FC, SVGAttributes, Ref } from 'react';
+import { SVGAttributes, Ref } from 'react';
 export interface IconProps extends SVGAttributes<SVGElement> {
   variant?: 'Linear' | 'Outline' | 'Broken' | 'Bold' | 'Bulk' | 'TwoTone';
   ref?: Ref<SVGSVGElement>;
   color?: string;
   size?: string | number;
 }
-export type Icon = FC<IconProps>;
+export type Icon = IconProps;
 `;
 
 const react = async (icons) => {
@@ -127,29 +127,18 @@ const react = async (icons) => {
       }
       const element = `
        import React, {forwardRef} from 'react';
-       import PropTypes from 'prop-types';
 
        ${loopAllVariant(iconsAllVariant)}
 
        ${switchStatementForVariants(iconsAllVariant)}
 
        const ${ComponentName} =
-       forwardRef(({ variant , color, size , ...rest }, ref) => {
+       forwardRef(({ variant = 'Linear', color = 'currentColor', size = '24', ...rest }, ref) => {
           return (
               <svg {...rest} xmlns="http://www.w3.org/2000/svg" ref={ref} width={size} height={size} viewBox="0 0 24 24" fill="none">
               {chooseVariant(variant, color)}
               </svg>)
        });
-       ${ComponentName}.propTypes = {
-        variant: PropTypes.oneOf(['Linear', 'Bold', 'Broken', 'Bulk', 'Outline', 'TwoTone']),
-        color: PropTypes.string,
-        size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-       }
-       ${ComponentName}.defaultProps = {
-        variant: 'Linear',
-        color: 'currentColor',
-        size: '24'
-       }
        ${ComponentName}.displayName = '${ComponentName}'
 
        export default ${ComponentName}
@@ -172,7 +161,7 @@ const react = async (icons) => {
   });
 };
 const nativeInitialTypeDefinitions = `/// <reference types="react" />
-import { FC, Component, Ref } from 'react';
+import { Component, Ref } from 'react';
 import { SvgProps } from 'react-native-svg';
 
 export interface IconProps extends SvgProps {
@@ -181,7 +170,7 @@ export interface IconProps extends SvgProps {
   color?: string;
   size?: string | number;
 }
-export type Icon = FC<IconProps>;
+export type Icon = IconProps;
 `;
 const reactNative = async (icons) => {
   console.log('----- generating icons -> react native');
@@ -206,7 +195,6 @@ const reactNative = async (icons) => {
       }
       const element = `
          import React, {forwardRef} from 'react';
-         import PropTypes from 'prop-types';
          import Svg, {  Path, G } from 'react-native-svg';
 
          ${loopAllVariant(iconsAllVariant, true)}
@@ -214,22 +202,12 @@ const reactNative = async (icons) => {
          ${switchStatementForVariants(iconsAllVariant)}
 
          const ${ComponentName} =
-         forwardRef(({ variant , color, size , ...rest }, ref) => {
+         forwardRef(({ variant = 'Linear', color = 'currentColor', size = '24', ...rest }, ref) => {
             return (
                 <Svg {...rest} xmlns="http://www.w3.org/2000/svg" ref={ref} width={size} height={size} viewBox="0 0 24 24" fill="none">
                 {chooseVariant(variant, color)}
                 </Svg>)
          });
-         ${ComponentName}.propTypes = {
-          variant: PropTypes.oneOf(['Linear', 'Bold', 'Broken', 'Bulk', 'Outline', 'TwoTone']),
-          color: PropTypes.string,
-          size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-         }
-         ${ComponentName}.defaultProps = {
-          variant: 'Linear',
-          color: 'currentColor',
-          size: '24'
-         }
          ${ComponentName}.displayName = '${ComponentName}'
          export default ${ComponentName}
          `;

@@ -1,6 +1,4 @@
-<h1 align="center">iconsax for React</h1>
-
-<a href="https://www.npmjs.com/package/iconsax-react-native">for React Native</a>
+<h1 align="center">Iconsax for React (Forked Version to Support React 19)</h1>
 
 <p align="center">
   1000 icons in 6 different styles, total 6000 icons | 
@@ -20,9 +18,11 @@ Perfectly balance |
 ## Installation
 
 ```bash
-yarn add iconsax-react
+yarn add @fadilmartias/iconsax-react
 # or
-npm i iconsax-react
+npm i @fadilmartias/iconsax-react
+# or
+pnpm add @fadilmartias/iconsax-react
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ npm i iconsax-react
 ```jsx
 import React from 'react';
 //import icon.
-import { EmojiHappy } from 'iconsax-react';
+import { EmojiHappy } from '@fadilmartias/iconsax-react';
 
 const Example = () => {
   // then use it as a normal React Component
